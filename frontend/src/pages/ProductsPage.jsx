@@ -213,8 +213,18 @@ const ProductsPage = () => {
               </select>
             </div>
           </div>
-          <div className={`${styles.section} text-2xl font-semibold`}>
+          <div className={`${styles.section} text-2xl font-semibold pt-2`}>
             <h1>{categoryData}</h1>
+          </div>
+          <div
+            style={searchValue ? { display: "flex" } : {}}
+            className={`${styles.section} text-base font-normal pt-2 searchValue`}>
+            <span>Kết quả tìm kiếm cho từ khóa "</span>
+            {" "}
+              <span style={{ color: "blue", fontWeight: "bold" }}>
+              {searchValue}
+              </span>
+              <span>"</span>
           </div>
           <div className="text-center">
             <p>
