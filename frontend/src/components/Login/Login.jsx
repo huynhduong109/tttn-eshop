@@ -30,7 +30,7 @@ const Login = () => {
 
       toast.success("Đăng nhập thành công!");
 
-      // Check the role and navigate accordingly
+      // Kiểm tra role user
       if (userRole === "Admin") {
         navigate("/admin/dashboard");
       } else {

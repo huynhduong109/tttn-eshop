@@ -7,6 +7,7 @@ import { getAllOrdersOfUser } from "../redux/actions/order";
 import { backend_url, server } from "../server";
 import { RxCross1 } from "react-icons/rx";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
+import { GrNext } from "react-icons/gr"
 import axios from "axios";
 import { toast } from "react-toastify";
 
@@ -80,7 +81,7 @@ const UserOrderDetails = () => {
   const refundHandler = async () => {
     await axios
       .put(`${server}/order/order-refund/${id}`, {
-        status: "Processing refund",
+        status: "Đang xử lý hoàn trả",
       })
       .then((res) => {
         toast.success(res.data.message);
@@ -91,6 +92,8 @@ const UserOrderDetails = () => {
       });
   };
 
+  const status = data?.status;
+
   return (
     <div className={`py-4 min-h-screen ${styles.section}`}>
       <div className="w-full flex items-center justify-between">
@@ -98,6 +101,13 @@ const UserOrderDetails = () => {
           <BsFillBagFill size={30} color="crimson" />
           <h1 className="pl-2 text-[25px]">Chi tiết đơn hàng</h1>
         </div>
+        <button
+          className={`text-right text-bold ${styles.button} bg-[#f2f2f2] border-none w-auto`}
+          onClick={() => navigate(`/user/track/order/${id}`)}
+        >
+          <span style={{ color: "black", fontWeight: "bold" }}>{status && `${status}`}</span>
+          <GrNext />
+        </button>
       </div>
 
       <div className="w-full flex items-center justify-between pt-6">
@@ -106,10 +116,10 @@ const UserOrderDetails = () => {
         </h5>
         <h5 className="text-[#00000084]">
           Ngày đặt: <span>{new Date(data?.createdAt).toLocaleString("vi-VN", {
-                      year: "numeric",
-                      month: "numeric",
-                      day: "numeric",
-                    })}</span>
+            year: "numeric",
+            month: "numeric",
+            day: "numeric",
+          })}</span>
         </h5>
       </div>
 
@@ -135,7 +145,7 @@ const UserOrderDetails = () => {
                   x {item.qty}
                 </h5>
               </div>
-              {!item.isReviewed && data?.status === "Delivered" ? (
+              {!item.isReviewed && data?.status === "Đã giao hàng" ? (
                 <div
                   className={`${styles.button} text-[#fff]`}
                   onClick={() => setOpen(true) || setSelectedItem(item)}>
@@ -268,7 +278,7 @@ const UserOrderDetails = () => {
               : "Chưa thanh toán"}
           </h4>
           <br />
-          {data?.status === "Delivered" && (
+          {data?.status === "Đã giao hàng" && (
             <div
               className={`${styles.button} text-white`}
               onClick={refundHandler}>
@@ -278,8 +288,8 @@ const UserOrderDetails = () => {
         </div>
       </div>
       <br />
-     
-        <div className={`${styles.button} text-white`}
+
+      <div className={`${styles.button} text-white`}
         onClick={handleMessageSubmit}>Gửi tin nhắn</div>
       <br />
       <br />

@@ -22,7 +22,7 @@ const AllRefundOrders = () => {
     orders &&
     orders.filter(
       (item) =>
-        item.status === "Processing refund" || item.status === "Refund Success"
+        item.status === "Đang xử lý hoàn trả" || item.status === "Hoàn trả thành công"
     );
 
   const columns = [
@@ -52,7 +52,7 @@ const AllRefundOrders = () => {
       minWidth: 130,
       flex: 0.7,
       cellClassName: (params) => {
-        return params.getValue(params.id, "status") === "Delivered"
+        return params.getValue(params.id, "status") === "Hoàn trả thành công"
           ? "greenColor"
           : "redColor";
       },

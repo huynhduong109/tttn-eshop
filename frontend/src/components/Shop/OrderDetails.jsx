@@ -82,10 +82,10 @@ const OrderDetails = () => {
         </h5>
         <h5 className="text-[#00000084]">
           Ngày đặt hàng: <span>{new Date(data?.createdAt).toLocaleString("vi-VN", {
-                      year: "numeric",
-                      month: "numeric",
-                      day: "numeric",
-                    })}</span>
+            year: "numeric",
+            month: "numeric",
+            day: "numeric",
+          })}</span>
         </h5>
       </div>
 
@@ -151,28 +151,28 @@ const OrderDetails = () => {
       <br />
       <br />
       <h4 className="pt-3 text-[20px] font-[600]">Tình trạng đơn hàng:</h4>
-      {data?.status !== "Processing refund" &&
-        data?.status !== "Refund Success" && (
+      {data?.status !== "Đang xử lý hoàn trả" &&
+        data?.status !== "Hoàn trả thành công" && (
           <select
             value={status}
             onChange={(e) => setStatus(e.target.value)}
             className="w-[200px] mt-2 border h-[35px] rounded-[5px]">
             {[
-              "Processing",
-              "Transferred to delivery partner",
-              "Shipping",
-              "Received",
-              "On the way",
-              "Delivered",
+              "Đang xử lý",
+              "Đơn hàng đã được giao cho đơn vị vận chuyển",
+              "Đơn hàng đang được vận chuyển",
+              "Đon hàng đã đến kho gần nhất",
+              "Đơn hàng đang trên đường giao đến",
+              "Đã giao hàng",
             ]
               .slice(
                 [
-                  "Processing",
-                  "Transferred to delivery partner",
-                  "Shipping",
-                  "Received",
-                  "On the way",
-                  "Delivered",
+                  "Đang xử lý",
+                  "Đơn hàng đã được giao cho đơn vị vận chuyển",
+                  "Đơn hàng đang được vận chuyển",
+                  "Đon hàng đã đến kho gần nhất",
+                  "Đơn hàng đang trên đường giao đến",
+                  "Đã giao hàng",
                 ].indexOf(data?.status)
               )
               .map((option, index) => (
@@ -182,15 +182,15 @@ const OrderDetails = () => {
               ))}
           </select>
         )}
-      {data?.status === "Processing refund" ||
-      data?.status === "Refund Success" ? (
+      {data?.status === "Đang xử lý hoàn trả" ||
+        data?.status === "Hoàn trả thành công" ? (
         <select
           value={status}
           onChange={(e) => setStatus(e.target.value)}
           className="w-[200px] mt-2 border h-[35px] rounded-[5px]">
-          {["Processing refund", "Refund Success"]
+          {["Đang xử lý hoàn trả", "Hoàn trả thành công"]
             .slice(
-              ["Processing refund", "Refund Success"].indexOf(data?.status)
+              ["Đang xử lý hoàn trả", "Hoàn trả thành công"].indexOf(data?.status)
             )
             .map((option, index) => (
               <option value={option} key={index}>
@@ -203,7 +203,7 @@ const OrderDetails = () => {
       <div
         className={`${styles.button} mt-5 !bg-[#FCE1E6] !rounded-[4px] text-[#E94560] font-[600] !h-[45px] text-[18px]`}
         onClick={
-          data?.status !== "Processing refund"
+          data?.status !== "Đang xử lý hoàn trả"
             ? orderUpdateHandler
             : refundOrderUpdateHandler
         }>

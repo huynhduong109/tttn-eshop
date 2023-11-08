@@ -19,22 +19,22 @@ const TrackOrder = () => {
   const data = orders && orders.find((item) => item._id === id);
 
   const orderSteps = [
-    { status: "Processing", icon: "⭕" },
-    { status: "Transferred to delivery partner", icon: "♻️" },
-    { status: "Shipping", icon: "🚚" },
-    { status: "Received", icon: "📬" },
-    { status: "On the way", icon: "🚛" },
-    { status: "Delivered", icon: "️🎯" },
+    { status: "Đang xử lý", icon: "⭕" },
+    { status: "Đơn hàng đã được giao cho đơn vị vận chuyển", icon: "♻️" },
+    { status: "Đơn hàng đang được vận chuyển", icon: "🚚" },
+    { status: "Đon hàng đã đến kho gần nhất", icon: "📬" },
+    { status: "Đơn hàng đang trên đường giao đến", icon: "🚛" },
+    { status: "Đã giao hàng", icon: "️🎯" },
   ];
 
   const refundSteps = [
-    { status: "Processing refund", icon: "⭕" },
-    { status: "Refund Success", icon: "♻️" },
+    { status: "Đang xử lý hoàn trả", icon: "⭕" },
+    { status: "Hoàn trả thành công", icon: "♻️" },
   ];
 
   // Lọc ra bước tiến trình mà đơn hàng đã đạt được
   const currentStatusIndex =
-    data?.status === "Processing refund" || data?.status === "Refund Success"
+    data?.status === "Đang xử lý hoàn trả" || data?.status === "Hoàn trả thành công"
       ? refundSteps.findIndex((step) => step.status === data?.status)
       : orderSteps.findIndex((step) => step.status === data?.status);
 
@@ -98,7 +98,7 @@ const TrackOrder = () => {
         </h1>
         {/* Thêm danh sách mô tả trạng thái */}
         <ul className="list-none pl-8 pt-4 space-y-4">
-          {(data?.status === "Processing refund" || data?.status === "Refund Success")
+          {(data?.status === "Đang xử lý hoàn trả" || data?.status === "Hoàn trả thành công")
             ? refundSteps.map((step, index) => (
               <li
                 key={index}
@@ -142,7 +142,7 @@ const TrackOrder = () => {
                 </div>
                 {index === currentStatusIndex && (
                   <span className="ml-auto text-[#00000084]">
-                    {data?.status === "Delivered"
+                    {data?.status === "Đã giao hàng"
                       ? new Date(data?.deliveredAt).toLocaleString("vi-VN", {
                         year: "numeric",
                         month: "numeric",

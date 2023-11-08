@@ -233,7 +233,7 @@ const AllOrders = () => {
       minWidth: 130,
       flex: 0.7,
       cellClassName: (params) => {
-        return params.getValue(params.id, "status") === "Delivered"
+        return params.getValue(params.id, "status") === "Đã giao hàng" || params.getValue(params.id, "status") === "Hoàn trả thành công"
           ? "greenColor"
           : "redColor";
       },
@@ -328,7 +328,7 @@ const AllRefundOrders = () => {
   }, []);
 
   const eligibleOrders =
-    orders && orders.filter((item) => item.status === "Processing refund");
+    orders && orders.filter((item) => item.status === "Đang xử lý hoàn trả");
 
   const columns = [
     {
@@ -357,7 +357,7 @@ const AllRefundOrders = () => {
       minWidth: 130,
       flex: 0.7,
       cellClassName: (params) => {
-        return params.getValue(params.id, "status") === "Delivered"
+        return params.getValue(params.id, "status") === "Hoàn trả thành công"
           ? "greenColor"
           : "redColor";
       },
@@ -478,7 +478,7 @@ const TrackOrder = () => {
       minWidth: 130,
       flex: 0.7,
       cellClassName: (params) => {
-        return params.getValue(params.id, "status") === "Delivered"
+        return params.getValue(params.id, "status") === "Đã giao hàng" || params.getValue(params.id, "status") === "Hoàn trả thành công"
           ? "greenColor"
           : "redColor";
       },

@@ -45,7 +45,7 @@ const DashboardHero = () => {
     return (
       orderDate >= new Date(valStartDay) &&
       orderDate <= new Date(valEndDay) &&
-      item.status === "Delivered"
+      item.status === "Đã giao hàng"
     );
   });
 
@@ -63,7 +63,7 @@ const DashboardHero = () => {
       minWidth: 130,
       flex: 0.7,
       cellClassName: (params) => {
-        return params.getValue(params.id, "status") === "Delivered"
+        return params.getValue(params.id, "status") === "Đã giao hàng"
           ? "greenColor"
           : "redColor";
       },

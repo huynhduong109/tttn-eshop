@@ -102,7 +102,7 @@ router.put(
                     new ErrorHandler("Không tìm thấy đơn hàng với id này", 400)
                 );
             }
-            if (req.body.status === "Transferred to delivery partner") {
+            if (req.body.status === "Đơn hàng đã được giao cho đơn vị vận chuyển") {
                 order.cart.forEach(async(o) => {
                     await updateOrder(o._id, o.qty);
                 });
@@ -110,7 +110,7 @@ router.put(
 
             order.status = req.body.status;
 
-            if (req.body.status === "Delivered") {
+            if (req.body.status === "Đã giao hàng") {
                 order.deliveredAt = Date.now();
                 order.paymentInfo.status = "Đã thanh toán";
                 const serviceCharge = order.totalPrice * 0.1;
@@ -197,7 +197,7 @@ router.put(
                 message: "Hoàn trả thành công!",
             });
 
-            if (req.body.status === "Refund Success") {
+            if (req.body.status === "Hoàn trả thành công") {
                 order.cart.forEach(async(o) => {
                     await updateOrder(o._id, o.qty);
                 });

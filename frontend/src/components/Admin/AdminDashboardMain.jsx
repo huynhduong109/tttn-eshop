@@ -43,7 +43,7 @@ const AdminDashboardMain = () => {
     return (
       orderDate >= new Date(valStartDay) &&
       orderDate <= new Date(valEndDay) &&
-      item.status === "Delivered"
+      item.status === "Đã giao hàng"
     );
   });
   //chart
@@ -57,7 +57,7 @@ const AdminDashboardMain = () => {
   console.log("deliveredOrdersInfo", deliveredOrdersInfo);
 
   const arrProductDelivered = adminOrders?.filter((item) => {
-    return item.status === "Delivered";
+    return item.status === "Đã giao hàng";
   });
 
   console.log("adminOrders", adminOrders);
@@ -107,7 +107,7 @@ const AdminDashboardMain = () => {
       minWidth: 130,
       flex: 0.7,
       cellClassName: (params) => {
-        return params.getValue(params.id, "status") === "Delivered"
+        return params.getValue(params.id, "status") === "Đã giao hàng"
           ? "greenColor"
           : "redColor";
       },
